@@ -5,7 +5,7 @@ import Header from './sharedComponents/Header/Header';
 import Footer from './sharedComponents/Footer/Footer';
 import Index from './pages/IndexPage/IndexPageContainer';
 import Answers from './pages/AnswersPage/AnswersPageContainer';
-import Marks from './pages/MarksPage/MarksPage';
+import Marks from './pages/MarksPage/MarksPageContainer';
 import store from './redux/store';
 
 const App = () => (
