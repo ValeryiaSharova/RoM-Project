@@ -17,6 +17,11 @@ const Header = () => {
                     Home
                   </Link>
                 </li>
+                <li className="scroll-to-section">
+                  <Link to="/answers" className="menu-item">
+                    Answers
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>
