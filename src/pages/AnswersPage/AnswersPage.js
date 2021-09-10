@@ -1,9 +1,24 @@
-import React from 'react';
+/* eslint-disable no-nested-ternary */
+import React, { useEffect } from 'react';
+
+import PropTypes from 'proptypes';
 import icon from '../../images/stars.png';
 import good from '../../images/heart.png';
 import bad from '../../images/skull.png';
 
-const AnswersPage = () => {
+const store = require('store');
+
+const AnswersPage = props => {
+  const { getAnswer } = props;
+
+  const markData = store.get('test');
+
+  useEffect(() => {
+    if (!store.get('test')) {
+      getAnswer();
+    }
+  }, [getAnswer]);
+
   return (
     <div>
       <div className="welcome-area" id="welcome">
@@ -22,34 +37,50 @@ const AnswersPage = () => {
       <section className="section" id="about">
         <div className="container">
           <div className="row">
-            <div className="col-lg-4">
-              <div className="features-item">
-                <div className="features-icon features-em">
-                  <h2>index </h2>
-                  <img src={icon} alt="Person" />
-                  <h4>person</h4>
-                  <h4>
-                    <div>
-                      <div className="features-allcall">All : markData</div>
-                      <img src={good} alt="Good" className="features-img" /> x markData
+            {markData ? (
+              Object.keys(markData).map((person, index) => (
+                <div className="col-lg-4" key={person}>
+                  <div className="features-item">
+                    <div className="features-icon features-em">
+                      <h2>{index + 1}</h2>
+                      <img src={icon} alt="Person" />
+                      <h4>{person}</h4>
+                      <h4>
+                        {markData[person].mark > 0 ? (
+                          <div>
+                            <div className="features-allcall">All : {markData[person].all}</div>
+                            <img src={good} alt="Good" className="features-img" /> x{' '}
+                            {markData[person].mark}
+                          </div>
+                        ) : markData[person].mark === 0 ? (
+                          <div>
+                            <div className="features-allcall">All : {markData[person].all}</div>
+                            <em>No answer :(</em>
+                          </div>
+                        ) : (
+                          <div>
+                            <div className="features-allcall">All : {markData[person].all}</div>
+                            <img src={bad} alt="Bad" className="features-img" /> x{' '}
+                            {markData[person].mark * -1}
+                          </div>
+                        )}
+                      </h4>
                     </div>
-                    <div>
-                      <div className="features-allcall">All : markData</div>
-                      <em>No answer :(</em>
-                    </div>
-                    <div>
-                      <div className="features-allcall">All : markData</div>
-                      <img src={bad} alt="Bad" className="features-img" /> x markData
-                    </div>
-                  </h4>
+                  </div>
                 </div>
-              </div>
-            </div>
+              ))
+            ) : (
+              <p>no data, please reset a page</p>
+            )}
           </div>
         </div>
       </section>
     </div>
   );
+};
+
+AnswersPage.propTypes = {
+  getAnswer: PropTypes.func.isRequired,
 };
 
 export default AnswersPage;
