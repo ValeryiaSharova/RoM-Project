@@ -1,20 +1,16 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Header from './sharedComponents/Header/Header';
+import Footer from './sharedComponents/Footer/Footer';
+import Index from './pages/IndexPage/IndexPage';
 
-const App = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-};
-
+const App = () => (
+  <BrowserRouter>
+    <Header />
+    <Switch>
+      <Route path="/" exact component={Index} />
+    </Switch>
+    <Footer />
+  </BrowserRouter>
+);
 export default App;

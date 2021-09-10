@@ -1,0 +1,29 @@
+#testimonials {
+  padding-top: 100px;
+  position: relative;
+  z-index: 9;
+}
+
+#testimonials .item .testimonial-content {
+  background: rgb(244, 129, 63);
+  background: linear-gradient(145deg, rgba(244, 129, 63, 1) 0%, rgba(241, 85, 106, 1) 100%);
+  margin-left: 60px;
+  padding: 40px 30px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.service-item {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#testimonials .item .testimonials-nopeople {
+  background: rgb(244, 129, 63);
+  background: linear-gradient(145deg, rgba(244, 129, 63, 1) 0%, rgba(241, 85, 106, 1) 100%);
+  margin-left: 60px;
+  padding: 40px 30px;
+  text-align: center;
+  border-radius: 5px;
+}
