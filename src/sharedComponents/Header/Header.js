@@ -22,6 +22,11 @@ const Header = () => {
                     Answers
                   </Link>
                 </li>
+                <li className="scroll-to-section">
+                  <Link to="/marks" className="menu-item">
+                    Marks
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>
