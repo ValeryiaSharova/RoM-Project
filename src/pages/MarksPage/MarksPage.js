@@ -1,20 +1,9 @@
-/* eslint-disable no-nested-ternary */
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import PropTypes from 'proptypes';
 
-const store = require('store');
-
 const MarksPage = props => {
-  const { calcMarks, marks } = props;
-
-  useEffect(() => {
-    if (!store.get('marks')) {
-      calcMarks();
-    }
-  }, [calcMarks, marks]);
-
-  const tempmarks = store.get('marks');
+  const { calcMarks, deleteMarks, marks } = props;
 
   return (
     <div>
@@ -31,18 +20,30 @@ const MarksPage = props => {
           </div>
         </div>
       </div>
+      <div className="item service-item">
+        <div>
+          <button className="main-button-slider" type="button" onClick={calcMarks}>
+            Show marks
+          </button>
+          <button className="main-button-slider" type="button" onClick={deleteMarks}>
+            Delete marks
+          </button>
+        </div>
+      </div>
+
+      <hr />
       <section className="section" id="about">
         <div className="container">
           <div className="row">
-            {tempmarks ? (
-              Object.keys(tempmarks).map(person => (
+            {marks ? (
+              Object.keys(marks).map(person => (
                 <div className="col-lg-4" key={person}>
                   <div className="features-item">
                     <div className="features-icon features-em">
                       <h4>{person}</h4>
                       <h4>
                         <div>
-                          <div>{tempmarks[person]}</div>
+                          <div>{marks[person]}</div>
                         </div>
                       </h4>
                     </div>
@@ -61,6 +62,7 @@ const MarksPage = props => {
 
 MarksPage.propTypes = {
   calcMarks: PropTypes.func.isRequired,
+  deleteMarks: PropTypes.func.isRequired,
   marks: PropTypes.object.isRequired,
 };
 

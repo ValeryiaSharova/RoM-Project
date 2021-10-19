@@ -4,6 +4,8 @@ import {
   receivePeople,
   failLoadPeople,
   receiveIndexVictim,
+  receiveCalcMarks,
+  deleteMarks,
 } from '../actions/peopleAction';
 
 const initialState = {
@@ -12,6 +14,7 @@ const initialState = {
   error: null,
   peopleData: [],
   victimID: null,
+  marks: null,
 };
 
 const reducer = handleActions(
@@ -32,6 +35,11 @@ const reducer = handleActions(
       ...state,
       victimID: id,
     }),
+    [receiveCalcMarks]: (state, { payload: marks }) => ({
+      ...state,
+      marks,
+    }),
+    [deleteMarks]: state => ({ ...state, marks: null }),
   },
   initialState
 );
