@@ -6,6 +6,7 @@ import {
   receiveIndexVictim,
   receiveCalcMarks,
   deleteMarks,
+  receiveResetMarks,
 } from '../actions/peopleAction';
 
 const initialState = {
@@ -40,6 +41,7 @@ const reducer = handleActions(
       marks,
     }),
     [deleteMarks]: state => ({ ...state, marks: null }),
+    [receiveResetMarks]: state => ({ ...state, marks: null }),
   },
   initialState
 );

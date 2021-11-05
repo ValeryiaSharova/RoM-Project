@@ -8,11 +8,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  const { calcMarks, deleteMarks } = bindActionCreators(actionsPeople, dispatch);
+  const { calcMarks, deleteMarks, resetMarks } = bindActionCreators(actionsPeople, dispatch);
 
   return {
     calcMarks,
     deleteMarks,
+    resetMarks,
   };
 };
 

@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'proptypes';
 
 const MarksPage = props => {
-  const { calcMarks, deleteMarks, marks } = props;
+  const { calcMarks, deleteMarks, marks, resetMarks } = props;
 
   return (
     <div>
@@ -25,9 +25,11 @@ const MarksPage = props => {
           <button className="main-button-slider" type="button" onClick={calcMarks}>
             Show marks
           </button>
-          <button className="main-button-slider" type="button" onClick={deleteMarks}>
-            Delete marks
-          </button>
+          {marks ? (
+            <button className="main-button-slider" type="button" onClick={deleteMarks}>
+              Delete marks
+            </button>
+          ) : null}
         </div>
       </div>
 
@@ -55,6 +57,15 @@ const MarksPage = props => {
             )}
           </div>
         </div>
+        {marks ? (
+          <div className="item service-item">
+            <div>
+              <button className="main-button-slider" type="button" onClick={resetMarks}>
+                Reset marks
+              </button>
+            </div>
+          </div>
+        ) : null}
       </section>
     </div>
   );
@@ -64,6 +75,7 @@ MarksPage.propTypes = {
   calcMarks: PropTypes.func.isRequired,
   deleteMarks: PropTypes.func.isRequired,
   marks: PropTypes.object.isRequired,
+  resetMarks: PropTypes.object.isRequired,
 };
 
 export default MarksPage;
