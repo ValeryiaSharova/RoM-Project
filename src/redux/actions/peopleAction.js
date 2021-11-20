@@ -15,7 +15,9 @@ export const receiveResetMarks = createAction('PEOPLE/RESET_MARKS');
 export const fetchPeople = () => async dispatch => {
   dispatch(requestPeople());
   try {
-    const { data: people } = await axios.get('https://api.jsonbin.io/b/61994f880ddbee6f8b0f54d8');
+    const { data: people } = await axios.get(
+      'https://api.jsonbin.io/b/61994f880ddbee6f8b0f54d8/latest'
+    );
     const newList = [];
     people.map((stud, index) => {
       const marks = store.get('test');
