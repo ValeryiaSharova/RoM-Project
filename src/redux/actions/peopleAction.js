@@ -33,13 +33,17 @@ export const fetchPeople = () => async dispatch => {
 };
 
 export const getVictim = () => async dispatch => {
-  const { data: people } = await axios.get('/people.json');
+  const { data: people } = await axios.get(
+    'https://api.jsonbin.io/b/61994f880ddbee6f8b0f54d8/latest'
+  );
   const index = Math.floor(Math.random() * (people.length - 1)) + 1;
   dispatch(receiveIndexVictim(index));
 };
 
 export const getAnswer = () => async dispatch => {
-  const { data: people } = await axios.get('/people.json');
+  const { data: people } = await axios.get(
+    'https://api.jsonbin.io/b/61994f880ddbee6f8b0f54d8/latest'
+  );
   const answerTemp = people.map(current => {
     const temp = {};
     temp[current] = { all: 0, mark: 0 };
