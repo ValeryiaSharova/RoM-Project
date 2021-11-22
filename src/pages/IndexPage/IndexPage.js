@@ -11,11 +11,11 @@ const IndexPage = props => {
     loadingPeople,
     loadedPeopleData,
     errorPeople,
-    fetchPeople,
     questionsData,
     loadingQuestions,
     loadedQuestionsData,
     errorQuestions,
+    fetchPeople,
     fetchQuestions,
     getAnswer,
   } = props;

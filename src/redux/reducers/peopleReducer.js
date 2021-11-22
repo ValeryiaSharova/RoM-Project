@@ -1,21 +1,11 @@
 import { handleActions } from 'redux-actions';
-import {
-  requestPeople,
-  receivePeople,
-  failLoadPeople,
-  receiveIndexVictim,
-  receiveCalcMarks,
-  deleteMarks,
-  receiveResetMarks,
-} from '../actions/peopleAction';
+import { requestPeople, receivePeople, failLoadPeople } from '../actions/peopleAction';
 
 const initialState = {
   loadedData: false,
   loading: false,
   error: null,
   peopleData: [],
-  victimID: null,
-  marks: null,
 };
 
 const reducer = handleActions(
@@ -32,16 +22,6 @@ const reducer = handleActions(
       loading: false,
       error,
     }),
-    [receiveIndexVictim]: (state, { payload: id }) => ({
-      ...state,
-      victimID: id,
-    }),
-    [receiveCalcMarks]: (state, { payload: marks }) => ({
-      ...state,
-      marks,
-    }),
-    [deleteMarks]: state => ({ ...state, marks: null }),
-    [receiveResetMarks]: state => ({ ...state, marks: null }),
   },
   initialState
 );

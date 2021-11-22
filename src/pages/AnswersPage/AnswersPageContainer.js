@@ -2,14 +2,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Answers from './AnswersPage';
 import * as actionsPeople from '../../redux/actions/peopleAction';
+import * as actionsMarks from '../../redux/actions/markAction';
 
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => {
-  const { getMark } = bindActionCreators(actionsPeople, dispatch);
+  const { getAnswer } = bindActionCreators(actionsPeople, dispatch);
 
   return {
-    getMark,
+    getAnswer,
   };
 };
 

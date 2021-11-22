@@ -16,17 +16,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  const { fetchPeople, getVictim, getMark, getAnswer } = bindActionCreators(
-    actionsPeople,
-    dispatch
-  );
+  const { fetchPeople, getAnswer } = bindActionCreators(actionsPeople, dispatch);
   const { fetchQuestions } = bindActionCreators(actionsQuestions, dispatch);
 
   return {
     fetchPeople,
-    getVictim,
     fetchQuestions,
-    getMark,
     getAnswer,
   };
 };
