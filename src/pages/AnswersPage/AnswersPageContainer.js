@@ -8,9 +8,12 @@ const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => {
   const { getAnswer } = bindActionCreators(actionsPeople, dispatch);
+  const { saveMarks, getSaveMarks } = bindActionCreators(actionsMarks, dispatch);
 
   return {
     getAnswer,
+    saveMarks,
+    getSaveMarks,
   };
 };
 
