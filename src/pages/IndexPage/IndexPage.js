@@ -9,7 +9,6 @@ const IndexPage = props => {
   const {
     peopleData,
     loadingPeople,
-    loadedPeopleData,
     errorPeople,
     questionsData,
     loadingQuestions,
@@ -17,45 +16,46 @@ const IndexPage = props => {
     errorQuestions,
     fetchPeople,
     fetchQuestions,
-    getAnswer,
+    getStartAnswerData,
+    answerData,
+    checkAnswer,
   } = props;
 
   useEffect(() => {
     if (!loadedQuestionsData) {
       fetchQuestions();
     }
-    if (!store.get('test')) {
-      getAnswer();
+    if (!store.get('test') || !answerData) {
+      getStartAnswerData();
     }
-    if (!loadedPeopleData) {
+    if (!peopleData) {
       fetchPeople();
     }
-  }, [fetchPeople, loadedPeopleData, fetchQuestions, loadedQuestionsData, getAnswer, peopleData]);
+  }, [
+    fetchPeople,
+    fetchQuestions,
+    loadedQuestionsData,
+    getStartAnswerData,
+    peopleData,
+    answerData,
+  ]);
 
   const [victim, setVictim] = useState('');
   const [question, setQuestion] = useState('');
   const [click, setClick] = useState(0);
 
   const goodAnswer = () => {
-    const marks = store.get('test');
-    marks[victim].mark += 1;
-    marks[victim].all += 1;
-    store.set('test', { ...marks });
+    checkAnswer(1, victim);
     setClick(1);
   };
 
   const sosoAnswer = () => {
-    const marks = store.get('test');
-    marks[victim].all += 1;
-    store.set('test', { ...marks });
+    checkAnswer(2, victim);
     setClick(1);
   };
 
   const badAnswer = () => {
-    const marks = store.get('test');
-    marks[victim].mark -= 1;
-    marks[victim].all += 1;
-    store.set('test', { ...marks });
+    checkAnswer(3, victim);
     setClick(1);
   };
 
@@ -105,7 +105,7 @@ const IndexPage = props => {
                 </h2>
               </div>
             </div>
-            {peopleData.length ? (
+            {peopleData ? (
               <div className="item service-item">
                 <div className="testimonial-content">
                   <VictimAndQuestions
@@ -132,17 +132,18 @@ const IndexPage = props => {
 };
 
 IndexPage.propTypes = {
-  peopleData: PropTypes.arrayOf(PropTypes.string).isRequired,
+  peopleData: PropTypes.object.isRequired,
   loadingPeople: PropTypes.bool.isRequired,
-  loadedPeopleData: PropTypes.bool.isRequired,
   errorPeople: PropTypes.object,
   fetchPeople: PropTypes.func.isRequired,
+  answerData: PropTypes.object.isRequired,
   questionsData: PropTypes.arrayOf(PropTypes.string).isRequired,
   loadingQuestions: PropTypes.bool.isRequired,
   loadedQuestionsData: PropTypes.bool.isRequired,
   errorQuestions: PropTypes.object,
   fetchQuestions: PropTypes.func.isRequired,
-  getAnswer: PropTypes.func.isRequired,
+  getStartAnswerData: PropTypes.func.isRequired,
+  checkAnswer: PropTypes.func.isRequired,
 };
 
 IndexPage.defaultProps = {

@@ -1,11 +1,32 @@
 import { handleActions } from 'redux-actions';
-import { requestPeople, receivePeople, failLoadPeople } from '../actions/peopleAction';
+import {
+  requestPeople,
+  receivePeople,
+  failLoadPeople,
+  requestGetSaveDataAnswer,
+  receiveGetSaveDataAnswer,
+  requestStartAnswerData,
+  receiveStartAnswerData,
+  failStartAnswerData,
+  receiveCalcMarks,
+  deleteMarks,
+  receiveResetMarks,
+  receiveSaveDataAnswer,
+  failSaveDataAnswer,
+  receiveCheckAnswer,
+} from '../actions/peopleAction';
 
 const initialState = {
-  loadedData: false,
   loading: false,
   error: null,
-  peopleData: [],
+  peopleData: null,
+  loadingGetSaveDataAnswer: false,
+  loadingStartAnswerData: false,
+  errorStartAnswerData: null,
+  marks: null,
+  answerData: null,
+  isSaveDataAnswer: false,
+  errorSaveDataAnswer: null,
 };
 
 const reducer = handleActions(
@@ -15,12 +36,45 @@ const reducer = handleActions(
       ...state,
       peopleData: people,
       loading: false,
-      loadedData: true,
     }),
     [failLoadPeople]: (state, { payload: error }) => ({
       ...state,
       loading: false,
       error,
+    }),
+    [requestStartAnswerData]: state => ({ ...state, loadingStartAnswerData: true }),
+    [receiveStartAnswerData]: (state, { payload: answerData }) => ({
+      ...state,
+      answerData,
+      loadingStartAnswerData: false,
+    }),
+    [failStartAnswerData]: (state, { payload: error }) => ({
+      ...state,
+      errorStartAnswerData: error,
+    }),
+    [receiveCalcMarks]: (state, { payload: marks }) => ({
+      ...state,
+      marks,
+    }),
+    [deleteMarks]: state => ({ ...state, marks: null }),
+    [receiveResetMarks]: (state, { payload: answerData }) => ({
+      ...state,
+      marks: null,
+      answerData,
+      peopleData: null,
+    }),
+    [receiveSaveDataAnswer]: state => ({ ...state, isSaveDataAnswer: true }),
+    [failSaveDataAnswer]: (state, { payload: error }) => ({ ...state, errorSaveDataAnswer: error }),
+    [requestGetSaveDataAnswer]: state => ({ ...state, loadingGetSaveDataAnswer: true }),
+    [receiveGetSaveDataAnswer]: (state, { payload: answerData }) => ({
+      ...state,
+      answerData,
+      loadingGetSaveDataAnswer: false,
+      peopleData: null,
+    }),
+    [receiveCheckAnswer]: (state, { payload: answerData }) => ({
+      ...state,
+      answerData,
     }),
   },
   initialState

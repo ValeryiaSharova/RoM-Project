@@ -9,15 +9,14 @@ import bad from '../../images/skull.png';
 const store = require('store');
 
 const AnswersPage = props => {
-  const { getAnswer } = props;
-
+  const { getStartAnswerData, saveDataAnswer, getSaveDataAnswer } = props;
   const markData = store.get('test');
 
   useEffect(() => {
     if (!store.get('test')) {
-      getAnswer();
+      getStartAnswerData();
     }
-  }, [getAnswer]);
+  }, [getStartAnswerData]);
 
   return (
     <div>
@@ -80,7 +79,9 @@ const AnswersPage = props => {
 };
 
 AnswersPage.propTypes = {
-  getAnswer: PropTypes.func.isRequired,
+  getStartAnswerData: PropTypes.func.isRequired,
+  saveDataAnswer: PropTypes.func.isRequired,
+  getSaveDataAnswer: PropTypes.func.isRequired,
 };
 
 export default AnswersPage;

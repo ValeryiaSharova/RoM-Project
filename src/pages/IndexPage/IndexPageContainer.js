@@ -7,8 +7,8 @@ import * as actionsQuestions from '../../redux/actions/questionAction';
 const mapStateToProps = state => ({
   peopleData: state.people.peopleData,
   loadingPeople: state.people.loading,
-  loadedPeopleData: state.people.loadedData,
   errorPeople: state.people.error,
+  answerData: state.people.answerData,
   questionsData: state.questions.questionsData,
   loadingQuestions: state.questions.loading,
   loadedQuestionsData: state.questions.loadedData,
@@ -16,13 +16,17 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  const { fetchPeople, getAnswer } = bindActionCreators(actionsPeople, dispatch);
+  const { fetchPeople, getStartAnswerData, checkAnswer } = bindActionCreators(
+    actionsPeople,
+    dispatch
+  );
   const { fetchQuestions } = bindActionCreators(actionsQuestions, dispatch);
 
   return {
     fetchPeople,
     fetchQuestions,
-    getAnswer,
+    checkAnswer,
+    getStartAnswerData,
   };
 };
 
