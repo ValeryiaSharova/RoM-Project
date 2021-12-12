@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'proptypes';
 
-const Header = () => {
+const Header = ({ isMarks }) => {
   return (
     <header className="header-area header-sticky">
       <div className="container">
@@ -22,9 +23,17 @@ const Header = () => {
                     Answers
                   </Link>
                 </li>
+                {isMarks ? (
+                  <li className="scroll-to-section">
+                    <Link to="/marks" className="menu-item">
+                      Marks
+                    </Link>
+                  </li>
+                ) : null}
+
                 <li className="scroll-to-section">
                   <Link to="/marks" className="menu-item">
-                    Marks
+                    Sign in / Sing up
                   </Link>
                 </li>
               </ul>
@@ -34,6 +43,10 @@ const Header = () => {
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  isMarks: PropTypes.bool.isRequired,
 };
 
 export default Header;

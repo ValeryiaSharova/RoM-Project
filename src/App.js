@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ModalProvider } from './context/ModalContext';
 import ModalRoot from './context/ModalRoot';
-import Header from './sharedComponents/Header/Header';
+import Header from './sharedComponents/Header/HeaderContainer';
 import Footer from './sharedComponents/Footer/Footer';
 import Index from './pages/IndexPage/IndexPageContainer';
 import Answers from './pages/AnswersPage/AnswersPageContainer';

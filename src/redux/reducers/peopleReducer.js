@@ -27,6 +27,7 @@ const initialState = {
   answerData: null,
   isSaveDataAnswer: false,
   errorSaveDataAnswer: null,
+  isMarks: false,
 };
 
 const reducer = handleActions(
@@ -62,6 +63,7 @@ const reducer = handleActions(
       marks: null,
       answerData,
       peopleData: null,
+      isMarks: false,
     }),
     [receiveSaveDataAnswer]: state => ({ ...state, isSaveDataAnswer: true }),
     [failSaveDataAnswer]: (state, { payload: error }) => ({ ...state, errorSaveDataAnswer: error }),
@@ -72,9 +74,10 @@ const reducer = handleActions(
       loadingGetSaveDataAnswer: false,
       peopleData: null,
     }),
-    [receiveCheckAnswer]: (state, { payload: answerData }) => ({
+    [receiveCheckAnswer]: (state, { payload: { answerData, isMarks } }) => ({
       ...state,
       answerData,
+      isMarks,
     }),
   },
   initialState

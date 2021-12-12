@@ -5,6 +5,7 @@ import * as actionsPeople from '../../redux/actions/peopleAction';
 
 const mapStateToProps = state => ({
   marks: state.people.marks,
+  answerData: state.people.answerData,
 });
 
 const mapDispatchToProps = dispatch => {

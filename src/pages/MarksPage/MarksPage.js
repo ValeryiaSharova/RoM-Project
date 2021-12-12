@@ -32,29 +32,25 @@ const MarksPage = props => {
           ) : null}
         </div>
       </div>
-
-      <hr />
       <section className="section" id="about">
         <div className="container">
           <div className="row">
-            {marks ? (
-              Object.keys(marks).map(person => (
-                <div className="col-lg-4" key={person}>
-                  <div className="features-item">
-                    <div className="features-icon features-em">
-                      <h4>{person}</h4>
-                      <h4>
-                        <div>
-                          <div>{marks[person]}</div>
-                        </div>
-                      </h4>
+            {marks
+              ? Object.keys(marks).map(person => (
+                  <div className="col-lg-4" key={person}>
+                    <div className="features-item">
+                      <div className="features-icon features-em">
+                        <h4>{person}</h4>
+                        <h4>
+                          <div>
+                            <div>{marks[person]}</div>
+                          </div>
+                        </h4>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
-            ) : (
-              <p>no data, please reset a page</p>
-            )}
+                ))
+              : null}
           </div>
         </div>
         {marks ? (

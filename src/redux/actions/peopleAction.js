@@ -31,7 +31,7 @@ export const failGetSaveDataAnswer = createAction(
 );
 export const receiveCheckAnswer = createAction(
   'MARKS/RECEIVE_CHECK_ANSWER',
-  answerData => answerData
+  (answerData, isMarks) => ({ answerData, isMarks })
 );
 
 export const fetchPeople = () => async dispatch => {
@@ -194,5 +194,6 @@ export const checkAnswer = (num, victim) => dispatch => {
       break;
     default:
   }
-  dispatch(receiveCheckAnswer(answers));
+  const isMarks = Object.keys(answers).some(person => answers[person].all === 5);
+  dispatch(receiveCheckAnswer(answers, isMarks));
 };
