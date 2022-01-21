@@ -1,9 +1,16 @@
 import React from 'react';
-
 import PropTypes from 'proptypes';
+import { useHistory } from 'react-router-dom';
 
 const MarksPage = props => {
   const { calcMarks, deleteMarks, marks, resetMarks } = props;
+
+  const history = useHistory();
+
+  const handleReset = () => {
+    resetMarks();
+    history.replace('/');
+  };
 
   return (
     <div>
@@ -56,7 +63,7 @@ const MarksPage = props => {
         {marks ? (
           <div className="item service-item">
             <div>
-              <button className="main-button-slider" type="button" onClick={resetMarks}>
+              <button className="main-button-slider" type="button" onClick={handleReset}>
                 Очистить оценки
               </button>
             </div>
