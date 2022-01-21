@@ -13,7 +13,7 @@ const MarksPage = props => {
             <div className="row">
               <div className="left-text">
                 <h1>
-                  Your <em>MARKS</em>
+                  Ваши <em>ОЦЕНКИ</em>
                 </h1>
               </div>
             </div>
@@ -23,11 +23,11 @@ const MarksPage = props => {
       <div className="item service-item">
         <div>
           <button className="main-button-slider" type="button" onClick={calcMarks}>
-            Show marks
+            Показать оценки
           </button>
           {marks ? (
             <button className="main-button-slider" type="button" onClick={deleteMarks}>
-              Delete marks
+              Скрыть оценки
             </button>
           ) : null}
         </div>
@@ -57,7 +57,7 @@ const MarksPage = props => {
           <div className="item service-item">
             <div>
               <button className="main-button-slider" type="button" onClick={resetMarks}>
-                Reset marks
+                Очистить оценки
               </button>
             </div>
           </div>

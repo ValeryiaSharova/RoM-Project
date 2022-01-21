@@ -83,7 +83,7 @@ const IndexPage = props => {
   };
 
   if (loadingPeople || loadingQuestions) {
-    return <p>loading...</p>;
+    return <p>Загрузка...</p>;
   }
 
   if (errorPeople || errorQuestions) {
@@ -101,7 +101,7 @@ const IndexPage = props => {
             <div className="col-lg-8 offset-lg-2">
               <div className="center-heading">
                 <h2>
-                  Who is <em>NEXT?</em>
+                  Кто будет <em>СЛЕДУЮЩИМ?</em>
                 </h2>
               </div>
             </div>
@@ -121,7 +121,7 @@ const IndexPage = props => {
               </div>
             ) : (
               <div className="item service-item">
-                <div className="testimonials-nopeople">Nonononono</div>
+                <div className="testimonials-nopeople">Ошибка :(</div>
               </div>
             )}
           </div>

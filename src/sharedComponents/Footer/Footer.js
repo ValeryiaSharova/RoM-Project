@@ -8,7 +8,7 @@ const Footer = () => {
           <div className="col-lg-12">
             <div className="sub-footer">
               <p>
-                Copyright &copy; 2021 Question Roulette | Designed by{' '}
+                Copyright &copy; 2022 Question Roulette | Designed by{' '}
                 <a rel="nofollow" href="https://templatemo.com">
                   TemplateMo
                 </a>

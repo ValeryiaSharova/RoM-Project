@@ -23,13 +23,13 @@ const ModalElement = props => {
           <Form.Label>Введите пароль</Form.Label>
           <Form.Control type="password" placeholder="Password" />
           <Button type="submit" className="main-button">
-            Submit
+            Подтвердить
           </Button>
         </Form>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={onRequestClose} className="main-button-slider">
-          Close
+          Закрыть
         </Button>
       </Modal.Footer>
     </Modal>

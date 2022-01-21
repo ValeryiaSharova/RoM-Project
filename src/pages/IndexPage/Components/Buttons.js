@@ -6,11 +6,11 @@ const Buttons = props => {
   return (
     <div className="center">
       <button className="main-button" type="button" onClick={handle}>
-        Click to get a victim!!!
+        Нажмите, чтобы выбрать отвечающего!!!
       </button>
       {victim ? (
         <button className="main-button" type="button" onClick={handleSkip}>
-          Skip a victim :((
+          Пропустить отвечающего :((
         </button>
       ) : null}
     </div>

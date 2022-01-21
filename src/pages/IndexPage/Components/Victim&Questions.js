@@ -7,26 +7,26 @@ const VictimAndQuestions = props => {
   return (
     <div>
       {!victim ? (
-        <h2>No victim</h2>
+        <h2>Нет отвечающего</h2>
       ) : (
         <div>
           <h2>{victim}</h2>
           {!click ? (
             <div>
               <button className="main-button-slider" type="button" onClick={goodAnswer}>
-                Good
+                Отлично
               </button>
               <button className="main-button-slider" type="button" onClick={sosoAnswer}>
-                So-So
+                Так себе
               </button>
               <button className="main-button-slider" type="button" onClick={badAnswer}>
-                Bad
+                Плохо
               </button>
             </div>
           ) : null}
           {!question ? (
             <div>
-              <h2>No questions :(</h2>
+              <h2>Больше нет вопросов :(</h2>
             </div>
           ) : (
             <div>

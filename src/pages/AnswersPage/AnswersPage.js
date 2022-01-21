@@ -27,7 +27,7 @@ const AnswersPage = props => {
             <div className="row">
               <div className="left-text">
                 <h1>
-                  Your <em>ANSWERS</em>
+                  Ваши <em>ОТВЕТЫ</em>
                 </h1>
                 <div className="item service-item">
                   <ModalConsumer>
@@ -37,12 +37,12 @@ const AnswersPage = props => {
                         type="button"
                         onClick={() => showModal(ModalElement, { saveDataAnswer })}
                       >
-                        Save marks
+                        Сохранить ответы
                       </button>
                     )}
                   </ModalConsumer>
                   <button className="main-button-slider" type="button" onClick={getSaveDataAnswer}>
-                    Get save marks
+                    Загрузить ответы
                   </button>
                 </div>
               </div>
@@ -64,18 +64,18 @@ const AnswersPage = props => {
                       <h4>
                         {markData[person].mark > 0 ? (
                           <div>
-                            <div className="features-allcall">All : {markData[person].all}</div>
+                            <div className="features-allcall">Все : {markData[person].all}</div>
                             <img src={good} alt="Good" className="features-img" /> x{' '}
                             {markData[person].mark}
                           </div>
                         ) : markData[person].mark === 0 ? (
                           <div>
-                            <div className="features-allcall">All : {markData[person].all}</div>
-                            <em>No answer :(</em>
+                            <div className="features-allcall">Все : {markData[person].all}</div>
+                            <em>Нет ответов :(</em>
                           </div>
                         ) : (
                           <div>
-                            <div className="features-allcall">All : {markData[person].all}</div>
+                            <div className="features-allcall">Все : {markData[person].all}</div>
                             <img src={bad} alt="Bad" className="features-img" /> x{' '}
                             {markData[person].mark * -1}
                           </div>
@@ -86,7 +86,7 @@ const AnswersPage = props => {
                 </div>
               ))
             ) : (
-              <p>no data, please reset a page</p>
+              <p>Нет данных, перезагрузите страницу или проверьте сервер</p>
             )}
           </div>
         </div>

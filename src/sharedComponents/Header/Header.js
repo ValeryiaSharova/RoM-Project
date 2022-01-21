@@ -15,27 +15,27 @@ const Header = ({ isMarks }) => {
               <ul className="nav">
                 <li className="scroll-to-section">
                   <Link to="/" className="menu-item">
-                    Home
+                    Главная
                   </Link>
                 </li>
                 <li className="scroll-to-section">
                   <Link to="/answers" className="menu-item">
-                    Answers
+                    Ответы
                   </Link>
                 </li>
                 {isMarks ? (
                   <li className="scroll-to-section">
                     <Link to="/marks" className="menu-item">
-                      Marks
+                      Оценки
                     </Link>
                   </li>
                 ) : null}
 
-                <li className="scroll-to-section">
+                {/*    <li className="scroll-to-section">
                   <Link to="/marks" className="menu-item">
                     Sign in / Sing up
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </div>
