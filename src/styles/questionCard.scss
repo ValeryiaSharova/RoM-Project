@@ -3,10 +3,11 @@
   margin-right: auto;
   text-align: center;
   display: table;
+  padding-bottom: 100px;
 }
 
 .question-card {
-  background: linear-gradient(145deg, rgba(244, 129, 63, 1) 0%, rgba(241, 85, 106, 1) 100%);
+  background: linear-gradient(145deg, $middleBlueGreen 0%, $viridianGreen 100%);
   border-radius: 5px;
 }
 
@@ -20,7 +21,7 @@
 
 .question-card-buttons-for-action__button {
   @extend %button;
-  background-color: #f4813f;
+  background-color: $blueSapphire;
 }
 
 .question-card-buttons-for-marks {
@@ -29,8 +30,13 @@
 
 .question-card-buttons-for-marks__button {
   @extend %button;
-  background-color: #fba70b;
+  background-color: $mediumChampagne;
+  color: $richBlack;
   font-size: 14px;
+  &:hover {
+    background-color: $blueSapphire;
+    color: $cultured;
+  }
 }
 
 .question-card__question {

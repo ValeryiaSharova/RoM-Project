@@ -1,9 +1,20 @@
+$richBlack: #001219;
+$blueSapphire: #005f73;
+$viridianGreen: #0a9396;
+$middleBlueGreen: #94d2bd;
+$mediumChampagne: #e9d8a6;
+$cultured: #f8f9fa;
+$gunmetal: #343a40;
+$gainsboro: #dee2e6;
+
 * {
   margin: 0;
 }
 
 body {
   height: 100%;
+  color: $richBlack;
+  background-color: $cultured;
 }
 
 html {
@@ -27,11 +38,14 @@ button {
   em {
     font-style: normal;
   }
+  @media (max-width: 480px) {
+    margin-bottom: 0px;
+  }
 }
 
 %button {
   text-transform: uppercase;
-  color: #fff;
+  color: $cultured;
   font-weight: 600;
   letter-spacing: 1px;
   border-radius: 25px;
@@ -40,14 +54,15 @@ button {
   margin: 10px;
 
   &:hover {
-    background-color: #f1556a;
+    background-color: $mediumChampagne;
+    color: $richBlack;
   }
 }
 
 .home-title {
   @extend %title-tpl;
   em {
-    color: #f4813f;
+    color: $viridianGreen;
   }
 }
 
@@ -55,7 +70,7 @@ button {
   @extend %title-tpl;
   margin-bottom: 0px;
   em {
-    color: #fba70b;
+    color: $middleBlueGreen;
   }
 }
 
@@ -66,7 +81,7 @@ button {
 .group-button__button {
   @extend %button;
   margin-bottom: 50px;
-  background-color: #f4813f;
+  background-color: $blueSapphire;
 
   @media (max-width: 480px) {
     margin-bottom: 20px;
@@ -75,5 +90,5 @@ button {
 
 .modal-button {
   @extend %button;
-  background-color: #fba70b;
+  background-color: $blueSapphire;
 }

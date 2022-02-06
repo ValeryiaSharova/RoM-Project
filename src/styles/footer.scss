@@ -3,21 +3,21 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: coral;
+  background-color: $blueSapphire;
   text-align: center;
 
   a {
-    color: #fff;
+    color: $cultured;
 
     &:hover {
-      color: #fc3;
+      color: $richBlack;
       text-decoration: none;
     }
   }
 }
 
 .footer__information {
-  color: #fff;
+  color: $cultured;
   font-size: 15px;
   font-weight: 300;
   letter-spacing: 0.5px;

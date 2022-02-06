@@ -3,7 +3,7 @@
 }
 
 .menu__logo {
-  color: #191a20;
+  color: $richBlack;
   font-size: 28px;
   font-weight: 700;
   text-transform: uppercase;
@@ -26,11 +26,13 @@
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
+  @media (max-width: 480px) {
+    margin-bottom: 0px;
+  }
 }
 
 .menu-items {
   justify-content: center;
-  background-color: #fff;
   list-style: none;
   display: flex;
 }
@@ -50,7 +52,7 @@
   letter-spacing: 1px;
 
   &:hover {
-    color: #fba70b;
+    color: $gunmetal;
     text-decoration: none;
   }
 }
