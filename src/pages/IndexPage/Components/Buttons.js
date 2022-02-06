@@ -4,13 +4,17 @@ import PropTypes from 'proptypes';
 const Buttons = props => {
   const { handle, victim, handleSkip } = props;
   return (
-    <div className="center">
-      <button className="main-button" type="button" onClick={handle}>
-        Нажмите, чтобы выбрать отвечающего!!!
+    <div className="question-card-buttons-for-action">
+      <button className="question-card-buttons-for-action__button" type="button" onClick={handle}>
+        {victim ? 'Следующий вопрос' : 'Нажмите, чтобы выбрать отвечающего!'}
       </button>
       {victim ? (
-        <button className="main-button" type="button" onClick={handleSkip}>
-          Пропустить отвечающего :((
+        <button
+          className="question-card-buttons-for-action__button"
+          type="button"
+          onClick={handleSkip}
+        >
+          Пропустить отвечающего
         </button>
       ) : null}
     </div>

@@ -14,62 +14,41 @@ const MarksPage = props => {
 
   return (
     <div>
-      <div className="welcome-area" id="welcome">
-        <div className="header-text">
-          <div className="container">
-            <div className="row">
-              <div className="left-text">
-                <h1>
-                  Ваши <em>ОЦЕНКИ</em>
-                </h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="item service-item">
-        <div>
-          <button className="main-button-slider" type="button" onClick={calcMarks}>
-            Показать оценки
-          </button>
-          {marks ? (
-            <button className="main-button-slider" type="button" onClick={deleteMarks}>
-              Скрыть оценки
-            </button>
-          ) : null}
-        </div>
-      </div>
-      <section className="section" id="about">
-        <div className="container">
-          <div className="row">
-            {marks
-              ? Object.keys(marks).map(person => (
-                  <div className="col-lg-4" key={person}>
-                    <div className="features-item">
-                      <div className="features-icon features-em">
-                        <h4>{person}</h4>
-                        <h4>
-                          <div>
-                            <div>{marks[person]}</div>
-                          </div>
-                        </h4>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              : null}
-          </div>
-        </div>
+      <h1 className="title">
+        Ваши <em>ОЦЕНКИ</em>
+      </h1>
+
+      <div className="group-button">
+        <button className="group-button__button" type="button" onClick={calcMarks}>
+          Показать оценки
+        </button>
         {marks ? (
-          <div className="item service-item">
-            <div>
-              <button className="main-button-slider" type="button" onClick={handleReset}>
-                Очистить оценки
-              </button>
-            </div>
-          </div>
+          <button className="group-button__button" type="button" onClick={deleteMarks}>
+            Скрыть оценки
+          </button>
         ) : null}
-      </section>
+      </div>
+
+      <div className="container">
+        <table className="marks">
+          {marks
+            ? Object.keys(marks).map(person => (
+                <tr className="marks-item" key={person}>
+                  <td>{person}</td>
+                  <td>{marks[person]}</td>
+                </tr>
+              ))
+            : null}
+        </table>
+      </div>
+
+      {marks ? (
+        <div className="group-button">
+          <button className="group-button__button" type="button" onClick={handleReset}>
+            Очистить оценки
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 };
@@ -82,3 +61,9 @@ MarksPage.propTypes = {
 };
 
 export default MarksPage;
+/*
+ <div className="marks__item" key={person}>
+                <h4>{person}</h4>
+                <p>{marks[person]}</p>
+              </div>
+              */

@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'proptypes';
 import { ModalConsumer } from '../../context/ModalContext';
 import ModalElement from './Components/Modal';
-import icon from '../../images/stars.png';
 import good from '../../images/heart.png';
 import bad from '../../images/skull.png';
 
@@ -20,78 +19,56 @@ const AnswersPage = props => {
   }, [getStartAnswerData]);
 
   return (
-    <div>
-      <div className="welcome-area" id="welcome">
-        <div className="header-text">
-          <div className="container">
-            <div className="row">
-              <div className="left-text">
-                <h1>
-                  Ваши <em>ОТВЕТЫ</em>
-                </h1>
-                <div className="item service-item">
-                  <ModalConsumer>
-                    {({ showModal }) => (
-                      <button
-                        className="main-button-slider"
-                        type="button"
-                        onClick={() => showModal(ModalElement, { saveDataAnswer })}
-                      >
-                        Сохранить ответы
-                      </button>
-                    )}
-                  </ModalConsumer>
-                  <button className="main-button-slider" type="button" onClick={getSaveDataAnswer}>
-                    Загрузить ответы
-                  </button>
-                </div>
+    <>
+      <h1 className="title">
+        Ваши <em>ОТВЕТЫ</em>
+      </h1>
+      <div className="group-button">
+        <ModalConsumer>
+          {({ showModal }) => (
+            <button
+              className="group-button__button"
+              type="button"
+              onClick={() => showModal(ModalElement, { saveDataAnswer })}
+            >
+              Сохранить ответы
+            </button>
+          )}
+        </ModalConsumer>
+        <button className="group-button__button" type="button" onClick={getSaveDataAnswer}>
+          Загрузить ответы
+        </button>
+      </div>
+
+      <div className="container card-list-wrapper">
+        {markData ? (
+          Object.keys(markData).map((person, index) => (
+            <div className="card-list" key={person}>
+              <h2 className="card-list__item-count">{index + 1}</h2>
+              <h4 className="card-list__item-name">{person}</h4>
+              <div className="card-list-item-answers">
+                <p className="card-list-item-answers__all-answers">Все : {markData[person].all}</p>
+                {markData[person].mark > 0 ? (
+                  <>
+                    <img src={good} alt="Good" className="card-list-item-answers__img" /> x{' '}
+                    {markData[person].mark}
+                  </>
+                ) : markData[person].mark === 0 ? (
+                  <p className="card-list-item-answers__no-answer">Нет ответов :(</p>
+                ) : (
+                  <>
+                    <img src={bad} alt="Bad" className="card-list-item-answers__img" /> x{' '}
+                    {markData[person].mark * -1}
+                  </>
+                )}
               </div>
             </div>
-          </div>
-        </div>
+          ))
+        ) : (
+          <p>Нет данных, перезагрузите страницу или проверьте сервер</p>
+        )}
       </div>
-      <section className="section" id="about">
-        <div className="container">
-          <div className="row">
-            {markData ? (
-              Object.keys(markData).map((person, index) => (
-                <div className="col-lg-4" key={person}>
-                  <div className="features-item">
-                    <div className="features-icon features-em">
-                      <h2>{index + 1}</h2>
-                      <img src={icon} alt="Person" />
-                      <h4>{person}</h4>
-                      <h4>
-                        {markData[person].mark > 0 ? (
-                          <div>
-                            <div className="features-allcall">Все : {markData[person].all}</div>
-                            <img src={good} alt="Good" className="features-img" /> x{' '}
-                            {markData[person].mark}
-                          </div>
-                        ) : markData[person].mark === 0 ? (
-                          <div>
-                            <div className="features-allcall">Все : {markData[person].all}</div>
-                            <em>Нет ответов :(</em>
-                          </div>
-                        ) : (
-                          <div>
-                            <div className="features-allcall">Все : {markData[person].all}</div>
-                            <img src={bad} alt="Bad" className="features-img" /> x{' '}
-                            {markData[person].mark * -1}
-                          </div>
-                        )}
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p>Нет данных, перезагрузите страницу или проверьте сервер</p>
-            )}
-          </div>
-        </div>
-      </section>
-    </div>
+    </>
   );
 };
 

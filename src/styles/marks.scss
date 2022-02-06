@@ -1,0 +1,16 @@
+.marks {
+  margin: 0px auto 40px auto;
+}
+
+.marks-item {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  @media (max-width: 500px) {
+    border-bottom: 1px solid grey;
+  }
+
+  td {
+    padding: 0px 30px;
+  }
+}

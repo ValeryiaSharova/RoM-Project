@@ -22,13 +22,13 @@ const ModalElement = props => {
         <Form onSubmit={handleSubmit}>
           <Form.Label>Введите пароль</Form.Label>
           <Form.Control type="password" placeholder="Password" />
-          <Button type="submit" className="main-button">
+          <Button type="submit" className="modal-button">
             Подтвердить
           </Button>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={onRequestClose} className="main-button-slider">
+        <Button onClick={onRequestClose} className="modal-button">
           Закрыть
         </Button>
       </Modal.Footer>

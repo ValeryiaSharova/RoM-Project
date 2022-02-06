@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+}
+
+body {
+  height: 100%;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+button:active,
+button:focus,
+button {
+  outline: none;
+}
+
+%title-tpl {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 80px;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 50px;
+  em {
+    font-style: normal;
+  }
+}
+
+%button {
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 25px;
+  border: none;
+  padding: 10px 25px;
+  margin: 10px;
+
+  &:hover {
+    background-color: #f1556a;
+  }
+}
+
+.home-title {
+  @extend %title-tpl;
+  em {
+    color: #f4813f;
+  }
+}
+
+.title {
+  @extend %title-tpl;
+  margin-bottom: 0px;
+  em {
+    color: #fba70b;
+  }
+}
+
+.group-button {
+  text-align: center;
+}
+
+.group-button__button {
+  @extend %button;
+  margin-bottom: 50px;
+  background-color: #f4813f;
+
+  @media (max-width: 480px) {
+    margin-bottom: 20px;
+  }
+}
+
+.modal-button {
+  @extend %button;
+  background-color: #fba70b;
+}

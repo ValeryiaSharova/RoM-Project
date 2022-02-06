@@ -31,14 +31,8 @@ const IndexPage = props => {
     if (!peopleData) {
       fetchPeople();
     }
-  }, [
-    fetchPeople,
-    fetchQuestions,
-    loadedQuestionsData,
-    getStartAnswerData,
-    peopleData,
-    answerData,
-  ]);
+    checkAnswer();
+  }, []);
 
   const [victim, setVictim] = useState('');
   const [question, setQuestion] = useState('');
@@ -91,42 +85,27 @@ const IndexPage = props => {
   }
 
   return (
-    <div id="container">
-      <div className="left-image-decor" />
-
-      <div className="right-image-decor" />
-      <section className="section" id="testimonials">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-8 offset-lg-2">
-              <div className="center-heading">
-                <h2>
-                  Кто будет <em>СЛЕДУЮЩИМ?</em>
-                </h2>
-              </div>
-            </div>
-            {peopleData ? (
-              <div className="item service-item">
-                <div className="testimonial-content">
-                  <VictimAndQuestions
-                    question={question}
-                    victim={victim}
-                    goodAnswer={goodAnswer}
-                    badAnswer={badAnswer}
-                    sosoAnswer={sosoAnswer}
-                    click={click}
-                  />
-                  <Buttons handle={handle} victim={victim} handleSkip={handleSkip} />
-                </div>
-              </div>
-            ) : (
-              <div className="item service-item">
-                <div className="testimonials-nopeople">Ошибка :(</div>
-              </div>
-            )}
+    <div className="container">
+      <h2 className="home-title">
+        Кто будет <em>СЛЕДУЮЩИМ?</em>
+      </h2>
+      {peopleData ? (
+        <div className="question-card-wrapper">
+          <div className="question-card">
+            <VictimAndQuestions
+              question={question}
+              victim={victim}
+              goodAnswer={goodAnswer}
+              badAnswer={badAnswer}
+              sosoAnswer={sosoAnswer}
+              click={click}
+            />
+            <Buttons handle={handle} victim={victim} handleSkip={handleSkip} />
           </div>
         </div>
-      </section>
+      ) : (
+        <div>Ошибка :(</div>
+      )}
     </div>
   );
 };
