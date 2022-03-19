@@ -1,38 +1,101 @@
-import { createAction } from 'redux-actions';
-import axios from '../axiosInstanse';
+/* eslint-disable no-param-reassign */
+import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const store = require('store');
 
-export const requestPeople = createAction('PEOPLE/REQUEST_PEOPLE');
-export const receivePeople = createAction('PEOPLE/RECEIVE_PEOPLE', people => people);
-export const failLoadPeople = createAction('PEOPLE/FAIL_LOAD_PEOPLE', error => error);
-export const requestStartAnswerData = createAction('MARKS/REQUEST_START_ANSWER_DATA');
-export const receiveStartAnswerData = createAction(
-  'MARKS/RECEIVE_START_ANSWER_DATA',
-  answerData => answerData
-);
-export const failStartAnswerData = createAction('MARKS/FAIL_START_ANSWER_DATA', error => error);
-export const deleteMarks = createAction('MARKS/DELETE_MARKS');
-export const receiveCalcMarks = createAction('MARKS/RECEIVE_CALC_MARKS', marks => marks);
-export const receiveResetMarks = createAction(
-  'MARKS/RECEIVE_RESET_MARKS',
-  answerData => answerData
-);
-export const receiveSaveDataAnswer = createAction('MARKS/RECEIVE_SAVE_DATA_ANSWER');
-export const failSaveDataAnswer = createAction('MARKS/FAIL_SAVE_DATA_ANSWER', error => error);
-export const requestGetSaveDataAnswer = createAction('MARKS/REQUEST_GET_SAVE_DATA_ANSWER');
-export const receiveGetSaveDataAnswer = createAction(
-  'MARKS/RECEIVE_GET_SAVE_DATA_ANSWER',
-  answerData => answerData
-);
-export const failGetSaveDataAnswer = createAction(
-  'MARKS/FAIL_GET_SAVE_DATA_ANSWER',
-  error => error
-);
-export const receiveCheckAnswer = createAction(
-  'MARKS/RECEIVE_CHECK_ANSWER',
-  (answerData, isMarks) => ({ answerData, isMarks })
-);
+const peopleSlice = createSlice({
+  name: 'people',
+  initialState: {
+    loading: false,
+    error: null,
+    peopleData: null,
+    loadingGetSaveDataAnswer: false,
+    loadingStartAnswerData: false,
+    errorStartAnswerData: null,
+    marks: null,
+    answerData: null,
+    isSaveDataAnswer: false,
+    errorSaveDataAnswer: null,
+    isMarks: false,
+  },
+  reducers: {
+    requestPeople: state => {
+      state.loading = true;
+    },
+    receivePeople: (state, action) => {
+      state.peopleData = action.payload;
+      state.loading = false;
+    },
+    failLoadPeople: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    requestStartAnswerData: state => {
+      state.loadingStartAnswerData = true;
+    },
+    receiveStartAnswerData: (state, action) => {
+      state.answerData = action.payload;
+      state.loadingStartAnswerData = false;
+    },
+    failStartAnswerData: (state, action) => {
+      state.errorStartAnswerData = action.payload;
+    },
+    receiveCalcMarks: (state, action) => {
+      state.marks = action.payload;
+    },
+    receiveResetMarks: (state, action) => {
+      state.marks = null;
+      state.answerData = action.payload;
+      state.peopleData = null;
+      state.isMarks = false;
+    },
+    receiveSaveDataAnswer: state => {
+      state.isSaveDataAnswer = true;
+    },
+    failSaveDataAnswer: (state, action) => {
+      state.errorSaveDataAnswer = action.payload;
+    },
+    requestGetSaveDataAnswer: state => {
+      state.loadingGetSaveDataAnswer = true;
+    },
+    receiveGetSaveDataAnswer: (state, action) => {
+      state.answerData = action.payload;
+      state.loadingGetSaveDataAnswer = false;
+      state.peopleData = null;
+    },
+    receiveCheckAnswer: (state, action) => {
+      state.answerData = action.payload.answerData;
+      state.isMarks = action.payload.isMarks;
+    },
+    failGetSaveDataAnswer: (state, action) => {
+      state.errorSaveDataAnswer = action.payload;
+    },
+    deleteMarks: state => {
+      state.marks = null;
+    },
+  },
+});
+
+const { actions, reducer: peopleReducer } = peopleSlice;
+const {
+  failGetSaveDataAnswer,
+  failLoadPeople,
+  failSaveDataAnswer,
+  failStartAnswerData,
+  receiveCalcMarks,
+  receiveCheckAnswer,
+  receiveGetSaveDataAnswer,
+  receivePeople,
+  receiveResetMarks,
+  receiveSaveDataAnswer,
+  receiveStartAnswerData,
+  requestGetSaveDataAnswer,
+  requestPeople,
+  requestStartAnswerData,
+} = actions;
+
+export const { deleteMarks } = actions;
 
 export const fetchPeople = () => async dispatch => {
   dispatch(requestPeople());
@@ -197,3 +260,12 @@ export const checkAnswer = (num, victim) => dispatch => {
   const isMarks = Object.keys(answers).some(person => answers[person].all === 5);
   dispatch(receiveCheckAnswer(answers, isMarks));
 };
+
+export const getIsMarks = () => state => state.people.isMarks;
+export const getMarks = () => state => state.people.marks;
+export const getAnswerData = () => state => state.people.answerData;
+export const getPeopleData = () => state => state.people.peopleData;
+export const getLoadingPeople = () => state => state.people.loading;
+export const getErrorPeople = () => state => state.people.error;
+
+export default peopleReducer;

@@ -1,14 +1,16 @@
 import React from 'react';
-import PropTypes from 'proptypes';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { getMarks, resetMarks, calcMarks, deleteMarks } from '../../redux/people';
 
-const MarksPage = props => {
-  const { calcMarks, deleteMarks, marks, resetMarks } = props;
-
+const MarksPage = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
 
+  const marks = useSelector(getMarks());
+
   const handleReset = () => {
-    resetMarks();
+    dispatch(resetMarks());
     history.replace('/');
   };
 
@@ -19,11 +21,11 @@ const MarksPage = props => {
       </h1>
 
       <div className="group-button">
-        <button className="group-button__button" type="button" onClick={calcMarks}>
+        <button className="group-button__button" type="button" onClick={dispatch(calcMarks)}>
           Показать оценки
         </button>
         {marks ? (
-          <button className="group-button__button" type="button" onClick={deleteMarks}>
+          <button className="group-button__button" type="button" onClick={dispatch(deleteMarks)}>
             Скрыть оценки
           </button>
         ) : null}
@@ -53,17 +55,4 @@ const MarksPage = props => {
   );
 };
 
-MarksPage.propTypes = {
-  calcMarks: PropTypes.func.isRequired,
-  deleteMarks: PropTypes.func.isRequired,
-  marks: PropTypes.object.isRequired,
-  resetMarks: PropTypes.object.isRequired,
-};
-
 export default MarksPage;
-/*
- <div className="marks__item" key={person}>
-                <h4>{person}</h4>
-                <p>{marks[person]}</p>
-              </div>
-              */

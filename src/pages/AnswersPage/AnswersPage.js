@@ -1,22 +1,32 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect } from 'react';
-import PropTypes from 'proptypes';
+import { useDispatch, useSelector } from 'react-redux';
 import { ModalConsumer } from '../../context/ModalContext';
 import ModalElement from './Components/Modal';
 import good from '../../images/heart.png';
 import bad from '../../images/skull.png';
+import {
+  getAnswerData,
+  getSaveDataAnswer,
+  getStartAnswerData,
+  saveDataAnswer,
+} from '../../redux/people';
 
 const store = require('store');
 
-const AnswersPage = props => {
-  const { getStartAnswerData, saveDataAnswer, getSaveDataAnswer } = props;
-  const markData = store.get('test');
+const AnswersPage = () => {
+  const dispatch = useDispatch();
+  const markData = useSelector(getAnswerData());
 
   useEffect(() => {
     if (!store.get('test')) {
-      getStartAnswerData();
+      dispatch(getStartAnswerData());
     }
-  }, [getStartAnswerData]);
+  }, []);
+
+  const handleClick = () => {
+    dispatch(getSaveDataAnswer());
+  };
 
   return (
     <>
@@ -35,7 +45,7 @@ const AnswersPage = props => {
             </button>
           )}
         </ModalConsumer>
-        <button className="group-button__button" type="button" onClick={getSaveDataAnswer}>
+        <button className="group-button__button" type="button" onClick={handleClick}>
           Загрузить ответы
         </button>
       </div>
@@ -70,12 +80,6 @@ const AnswersPage = props => {
       </div>
     </>
   );
-};
-
-AnswersPage.propTypes = {
-  getStartAnswerData: PropTypes.func.isRequired,
-  saveDataAnswer: PropTypes.func.isRequired,
-  getSaveDataAnswer: PropTypes.func.isRequired,
 };
 
 export default AnswersPage;

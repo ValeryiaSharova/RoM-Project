@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'proptypes';
+import { useSelector } from 'react-redux';
+import { getIsMarks } from '../../redux/people';
 
-const Header = ({ isMarks }) => {
+const Header = () => {
+  const isMarks = useSelector(getIsMarks());
   return (
     <header className="menu">
       <p className="menu__logo">Roullete</p>
@@ -30,9 +32,4 @@ const Header = ({ isMarks }) => {
     </header>
   );
 };
-
-Header.propTypes = {
-  isMarks: PropTypes.bool.isRequired,
-};
-
 export default Header;

@@ -1,14 +1,17 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
-import peopleReducer from './reducers/peopleReducer';
-import questionReducer from './reducers/questionReducer';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import peopleReducer from './people';
+import questionsReducer from './questions';
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
   people: peopleReducer,
-  questions: questionReducer,
+  questions: questionsReducer,
 });
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
+function createStore() {
+  return configureStore({
+    reducer: rootReducer,
+    devTools: process.env.NODE_ENV !== 'production',
+  });
+}
 
-export default store;
+export default createStore;

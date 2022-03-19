@@ -3,13 +3,15 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'proptypes';
+import { useDispatch } from 'react-redux';
 
 const ModalElement = props => {
+  const dispatch = useDispatch();
   const { onRequestClose, saveDataAnswer } = props;
   const handleSubmit = e => {
     e.preventDefault();
     if (e.target[0].value === 'ybrnjytpyftn!') {
-      saveDataAnswer();
+      dispatch(saveDataAnswer());
       onRequestClose();
     }
   };
