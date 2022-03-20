@@ -5,11 +5,11 @@ import Form from 'react-bootstrap/Form';
 import PropTypes from 'proptypes';
 
 const ModalElement = props => {
-  const { onRequestClose, saveDataAnswer } = props;
+  const { onRequestClose, changeStatus } = props;
   const handleSubmit = e => {
     e.preventDefault();
     if (e.target[0].value === 'ybrnjytpyftn!') {
-      saveDataAnswer();
+      changeStatus();
       onRequestClose();
     }
   };
@@ -38,7 +38,7 @@ const ModalElement = props => {
 
 ModalElement.propTypes = {
   onRequestClose: PropTypes.func.isRequired,
-  saveDataAnswer: PropTypes.func.isRequired,
+  changeStatus: PropTypes.func.isRequired,
 };
 
 export default ModalElement;
