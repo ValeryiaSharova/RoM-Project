@@ -11,6 +11,14 @@ import Marks from './pages/MarksPage/MarksPageContainer';
 import store from './redux/store';
 import ProtectedRoute from './sharedComponents/protectedRouteContainer';
 
+const localStore = require('store');
+
+const status = localStore.get('isAdmin') === undefined ? false : localStore.get('isAdmin');
+const subject = localStore.get('subject') === undefined ? 'ОАИП' : localStore.get('subject');
+
+localStore.set('isAdmin', status);
+localStore.set('subject', subject);
+
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
