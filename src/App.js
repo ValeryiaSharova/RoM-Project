@@ -10,7 +10,6 @@ import Answers from './pages/AnswersPage/AnswersPageContainer';
 import Marks from './pages/MarksPage/MarksPageContainer';
 import store from './redux/store';
 import ProtectedRoute from './sharedComponents/protectedRouteContainer';
-import Settings from './pages/SettingsPage/SettingsPageContainer';
 
 const localStore = require('store');
 
@@ -30,7 +29,6 @@ const App = () => (
           <ProtectedRoute path="/" exact component={Index} />
           <Route path="/answers" exact component={Answers} />
           <Route path="/marks" exact component={Marks} />
-          <Route path="/settings" exact component={Settings} />
         </Switch>
         <Footer />
       </ModalProvider>
