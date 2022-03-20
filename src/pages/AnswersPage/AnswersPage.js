@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect } from 'react';
 import PropTypes from 'proptypes';
+import { toast } from 'react-toastify';
 import good from '../../images/heart.png';
 import bad from '../../images/skull.png';
 
@@ -17,6 +18,11 @@ const AnswersPage = props => {
     checkAnswer();
   }, []);
 
+  const handleCLick = () => {
+    saveDataAnswer();
+    toast.info('Данные сохранены');
+  };
+
   if (loadingGetSaveDataAnswer) {
     return <h1 className="title">Загрузка...</h1>;
   }
@@ -28,7 +34,7 @@ const AnswersPage = props => {
       </h1>
       <div className="group-button">
         {isAdmin ? (
-          <button className="group-button__button" type="button" onClick={saveDataAnswer}>
+          <button className="group-button__button" type="button" onClick={handleCLick}>
             Сохранить ответы
           </button>
         ) : null}

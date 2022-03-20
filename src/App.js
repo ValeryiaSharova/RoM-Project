@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { ModalProvider } from './context/ModalContext';
 import ModalRoot from './context/ModalRoot';
 import Header from './sharedComponents/Header/HeaderContainer';
@@ -33,6 +34,7 @@ const App = () => (
         <Footer />
       </ModalProvider>
     </BrowserRouter>
+    <ToastContainer />
   </Provider>
 );
 export default App;
