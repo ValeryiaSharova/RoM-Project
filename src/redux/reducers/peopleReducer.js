@@ -5,9 +5,6 @@ import {
   failLoadPeople,
   requestGetSaveDataAnswer,
   receiveGetSaveDataAnswer,
-  requestStartAnswerData,
-  receiveStartAnswerData,
-  failStartAnswerData,
   receiveCalcMarks,
   deleteMarks,
   receiveResetMarks,
@@ -42,16 +39,6 @@ const reducer = handleActions(
       ...state,
       loading: false,
       error,
-    }),
-    [requestStartAnswerData]: state => ({ ...state, loadingStartAnswerData: true }),
-    [receiveStartAnswerData]: (state, { payload: answerData }) => ({
-      ...state,
-      answerData,
-      loadingStartAnswerData: false,
-    }),
-    [failStartAnswerData]: (state, { payload: error }) => ({
-      ...state,
-      errorStartAnswerData: error,
     }),
     [receiveCalcMarks]: (state, { payload: marks }) => ({
       ...state,

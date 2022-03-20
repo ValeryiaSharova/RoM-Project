@@ -6,12 +6,6 @@ const store = require('store');
 export const requestPeople = createAction('PEOPLE/REQUEST_PEOPLE');
 export const receivePeople = createAction('PEOPLE/RECEIVE_PEOPLE', people => people);
 export const failLoadPeople = createAction('PEOPLE/FAIL_LOAD_PEOPLE', error => error);
-export const requestStartAnswerData = createAction('MARKS/REQUEST_START_ANSWER_DATA');
-export const receiveStartAnswerData = createAction(
-  'MARKS/RECEIVE_START_ANSWER_DATA',
-  answerData => answerData
-);
-export const failStartAnswerData = createAction('MARKS/FAIL_START_ANSWER_DATA', error => error);
 export const deleteMarks = createAction('MARKS/DELETE_MARKS');
 export const receiveCalcMarks = createAction('MARKS/RECEIVE_CALC_MARKS', marks => marks);
 export const receiveResetMarks = createAction(
@@ -54,49 +48,40 @@ export const fetchPeople = () => async dispatch => {
   }
 };
 
-export const getSaveDataAnswer = () => async dispatch => {
+export const getSaveDataAnswer = subject => async dispatch => {
   dispatch(requestGetSaveDataAnswer());
-  try {
-    const { data: answerData } = await axios.get(
-      'https://api.jsonbin.io/b/619967eb62ed886f91522914/latest',
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'secret-key': '$2b$10$DmD.XOZCf7sWxoFopdcxsOVq4D6GVx7hj2PzYZ04pzp/bV1JziGTK',
-        },
-      }
-    );
-    store.set('test', answerData);
-    dispatch(receiveGetSaveDataAnswer(answerData));
-  } catch (error) {
-    dispatch(failGetSaveDataAnswer(error));
-  }
-};
-
-export const getStartAnswerData = () => async dispatch => {
-  if (!store.get('test')) {
-    dispatch(requestStartAnswerData());
+  if (subject === 'ИПО') {
     try {
-      const { data: people } = await axios.get(
-        'https://api.jsonbin.io/b/61994f880ddbee6f8b0f54d8/latest'
+      const { data: answerData } = await axios.get(
+        'https://api.jsonbin.io/b/62375a807caf5d67836dadd4/latest',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'secret-key': '$2b$10$DmD.XOZCf7sWxoFopdcxsOVq4D6GVx7hj2PzYZ04pzp/bV1JziGTK',
+          },
+        }
       );
-      const answerTemp = people.map(current => {
-        const temp = {};
-        temp[current] = { all: 0, mark: 0 };
-        return { ...temp };
-      });
-      const answer = answerTemp.reduce((res, item) => {
-        const key = Object.keys(item)[0];
-        res[key] = item[key];
-        return res;
-      });
-      store.set('test', answer);
-      dispatch(receiveStartAnswerData(answer));
+      store.set('test', answerData);
+      dispatch(receiveGetSaveDataAnswer(answerData));
     } catch (error) {
-      dispatch(failStartAnswerData(error));
+      dispatch(failGetSaveDataAnswer(error));
     }
   } else {
-    dispatch(receiveStartAnswerData(store.get('test')));
+    try {
+      const { data: answerData } = await axios.get(
+        'https://api.jsonbin.io/b/619967eb62ed886f91522914/latest',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'secret-key': '$2b$10$DmD.XOZCf7sWxoFopdcxsOVq4D6GVx7hj2PzYZ04pzp/bV1JziGTK',
+          },
+        }
+      );
+      store.set('test', answerData);
+      dispatch(receiveGetSaveDataAnswer(answerData));
+    } catch (error) {
+      dispatch(failGetSaveDataAnswer(error));
+    }
   }
 };
 
@@ -161,17 +146,31 @@ export const resetMarks = () => dispatch => {
   dispatch(receiveResetMarks(answers));
 };
 
-export const saveDataAnswer = () => async dispatch => {
-  try {
-    await axios.put('https://api.jsonbin.io/b/619967eb62ed886f91522914', store.get('test'), {
-      headers: {
-        'Content-Type': 'application/json',
-        'secret-key': '$2b$10$DmD.XOZCf7sWxoFopdcxsOVq4D6GVx7hj2PzYZ04pzp/bV1JziGTK',
-      },
-    });
-    dispatch(receiveSaveDataAnswer());
-  } catch (error) {
-    dispatch(failSaveDataAnswer(error));
+export const saveDataAnswer = subject => async dispatch => {
+  if (subject === 'ИПО') {
+    try {
+      await axios.put('https://api.jsonbin.io/b/62375a807caf5d67836dadd4', store.get('test'), {
+        headers: {
+          'Content-Type': 'application/json',
+          'secret-key': '$2b$10$DmD.XOZCf7sWxoFopdcxsOVq4D6GVx7hj2PzYZ04pzp/bV1JziGTK',
+        },
+      });
+      dispatch(receiveSaveDataAnswer());
+    } catch (error) {
+      dispatch(failSaveDataAnswer(error));
+    }
+  } else {
+    try {
+      await axios.put('https://api.jsonbin.io/b/619967eb62ed886f91522914', store.get('test'), {
+        headers: {
+          'Content-Type': 'application/json',
+          'secret-key': '$2b$10$DmD.XOZCf7sWxoFopdcxsOVq4D6GVx7hj2PzYZ04pzp/bV1JziGTK',
+        },
+      });
+      dispatch(receiveSaveDataAnswer());
+    } catch (error) {
+      dispatch(failSaveDataAnswer(error));
+    }
   }
 };
 
