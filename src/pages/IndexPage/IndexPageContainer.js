@@ -13,10 +13,11 @@ const mapStateToProps = state => ({
   loadingQuestions: state.questions.loading,
   loadedQuestionsData: state.questions.loadedData,
   errorQuestions: state.questions.error,
+  subject: state.user.subject,
 });
 
 const mapDispatchToProps = dispatch => {
-  const { fetchPeople, getStartAnswerData, checkAnswer } = bindActionCreators(
+  const { fetchPeople, checkAnswer, getSaveDataAnswer } = bindActionCreators(
     actionsPeople,
     dispatch
   );
@@ -26,7 +27,7 @@ const mapDispatchToProps = dispatch => {
     fetchPeople,
     fetchQuestions,
     checkAnswer,
-    getStartAnswerData,
+    getSaveDataAnswer,
   };
 };
 

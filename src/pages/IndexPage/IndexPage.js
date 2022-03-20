@@ -3,8 +3,6 @@ import PropTypes from 'proptypes';
 import VictimAndQuestions from './Components/Victim&Questions';
 import Buttons from './Components/Buttons';
 
-const store = require('store');
-
 const IndexPage = props => {
   const {
     peopleData,
@@ -16,17 +14,12 @@ const IndexPage = props => {
     errorQuestions,
     fetchPeople,
     fetchQuestions,
-    getStartAnswerData,
-    answerData,
     checkAnswer,
+    subject,
   } = props;
-
   useEffect(() => {
     if (!loadedQuestionsData) {
-      fetchQuestions();
-    }
-    if (!store.get('test') || !answerData) {
-      getStartAnswerData();
+      fetchQuestions(subject);
     }
     if (!peopleData) {
       fetchPeople();
@@ -40,16 +33,19 @@ const IndexPage = props => {
 
   const goodAnswer = () => {
     checkAnswer(1, victim);
+    questionsData.splice(0, 1);
     setClick(1);
   };
 
   const sosoAnswer = () => {
     checkAnswer(2, victim);
+    questionsData.splice(0, 1);
     setClick(1);
   };
 
   const badAnswer = () => {
     checkAnswer(3, victim);
+    questionsData.splice(0, 1);
     setClick(1);
   };
 
@@ -59,7 +55,7 @@ const IndexPage = props => {
     setVictim(peopleData[index - 1]);
     peopleData.splice(index - 1, 1);
     setQuestion(questionsData[0]);
-    questionsData.splice(0, 1);
+
     if (peopleData.length <= 5 && peopleData.length > 0) {
       fetchPeople();
     }
@@ -111,23 +107,23 @@ const IndexPage = props => {
 };
 
 IndexPage.propTypes = {
-  peopleData: PropTypes.object.isRequired,
+  peopleData: PropTypes.array,
   loadingPeople: PropTypes.bool.isRequired,
   errorPeople: PropTypes.object,
   fetchPeople: PropTypes.func.isRequired,
-  answerData: PropTypes.object.isRequired,
   questionsData: PropTypes.arrayOf(PropTypes.string).isRequired,
   loadingQuestions: PropTypes.bool.isRequired,
   loadedQuestionsData: PropTypes.bool.isRequired,
   errorQuestions: PropTypes.object,
   fetchQuestions: PropTypes.func.isRequired,
-  getStartAnswerData: PropTypes.func.isRequired,
   checkAnswer: PropTypes.func.isRequired,
+  subject: PropTypes.string.isRequired,
 };
 
 IndexPage.defaultProps = {
   errorPeople: null,
   errorQuestions: null,
+  peopleData: null,
 };
 
 export default IndexPage;
