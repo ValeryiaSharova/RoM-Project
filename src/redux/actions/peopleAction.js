@@ -6,7 +6,6 @@ const store = require('store');
 export const requestPeople = createAction('PEOPLE/REQUEST_PEOPLE');
 export const receivePeople = createAction('PEOPLE/RECEIVE_PEOPLE', people => people);
 export const failLoadPeople = createAction('PEOPLE/FAIL_LOAD_PEOPLE', error => error);
-export const deleteMarks = createAction('MARKS/DELETE_MARKS');
 export const receiveCalcMarks = createAction('MARKS/RECEIVE_CALC_MARKS', marks => marks);
 export const receiveResetMarks = createAction(
   'MARKS/RECEIVE_RESET_MARKS',

@@ -10,11 +10,15 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  const { saveDataAnswer, getSaveDataAnswer } = bindActionCreators(actionsPeople, dispatch);
+  const { saveDataAnswer, getSaveDataAnswer, checkAnswer } = bindActionCreators(
+    actionsPeople,
+    dispatch
+  );
 
   return {
     saveDataAnswer,
     getSaveDataAnswer,
+    checkAnswer,
   };
 };
 

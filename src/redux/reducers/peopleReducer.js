@@ -6,7 +6,6 @@ import {
   requestGetSaveDataAnswer,
   receiveGetSaveDataAnswer,
   receiveCalcMarks,
-  deleteMarks,
   receiveResetMarks,
   receiveSaveDataAnswer,
   failSaveDataAnswer,
@@ -44,7 +43,6 @@ const reducer = handleActions(
       ...state,
       marks,
     }),
-    [deleteMarks]: state => ({ ...state, marks: null }),
     [receiveResetMarks]: (state, { payload: answerData }) => ({
       ...state,
       marks: null,
@@ -59,7 +57,6 @@ const reducer = handleActions(
       ...state,
       answerData,
       loadingGetSaveDataAnswer: false,
-      peopleData: null,
     }),
     [receiveCheckAnswer]: (state, { payload: { answerData, isMarks } }) => ({
       ...state,

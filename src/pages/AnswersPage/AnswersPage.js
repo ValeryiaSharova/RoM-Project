@@ -7,13 +7,19 @@ import bad from '../../images/skull.png';
 const store = require('store');
 
 const AnswersPage = props => {
-  const { saveDataAnswer, getSaveDataAnswer, isAdmin, loadingGetSaveDataAnswer } = props;
+  const { saveDataAnswer, getSaveDataAnswer, isAdmin, loadingGetSaveDataAnswer, checkAnswer } =
+    props;
   const markData = store.get('test');
-  useEffect(() => {
+  useEffect(async () => {
     if (!store.get('test')) {
-      getSaveDataAnswer();
+      await getSaveDataAnswer();
     }
+    checkAnswer();
   }, []);
+
+  if (loadingGetSaveDataAnswer) {
+    return <h1 className="title">Загрузка...</h1>;
+  }
 
   return (
     <>
@@ -52,8 +58,6 @@ const AnswersPage = props => {
               </div>
             </div>
           ))
-        ) : loadingGetSaveDataAnswer ? (
-          <h1>Загрузка...</h1>
         ) : (
           <p>Нет данных, перезагрузите страницу или проверьте сервер</p>
         )}
@@ -67,6 +71,7 @@ AnswersPage.propTypes = {
   getSaveDataAnswer: PropTypes.func.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   loadingGetSaveDataAnswer: PropTypes.bool.isRequired,
+  checkAnswer: PropTypes.func.isRequired,
 };
 
 export default AnswersPage;

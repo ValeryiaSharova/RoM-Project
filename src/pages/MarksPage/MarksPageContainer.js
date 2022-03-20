@@ -6,14 +6,14 @@ import * as actionsPeople from '../../redux/actions/peopleAction';
 const mapStateToProps = state => ({
   marks: state.people.marks,
   answerData: state.people.answerData,
+  isAdmin: state.user.isAdmin,
 });
 
 const mapDispatchToProps = dispatch => {
-  const { calcMarks, deleteMarks, resetMarks } = bindActionCreators(actionsPeople, dispatch);
+  const { calcMarks, resetMarks } = bindActionCreators(actionsPeople, dispatch);
 
   return {
     calcMarks,
-    deleteMarks,
     resetMarks,
   };
 };
