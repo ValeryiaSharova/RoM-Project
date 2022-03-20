@@ -20,6 +20,15 @@
   @media (max-width: 770px) {
     display: none;
   }
+
+  &-subject {
+    font-size: 10px;
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 15px;
+    letter-spacing: 0px;
+    color: $blueSapphire;
+  }
 }
 
 .menu-items-container {
