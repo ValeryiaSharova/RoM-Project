@@ -9,6 +9,7 @@ import Index from './pages/IndexPage/IndexPageContainer';
 import Answers from './pages/AnswersPage/AnswersPageContainer';
 import Marks from './pages/MarksPage/MarksPageContainer';
 import store from './redux/store';
+import ProtectedRoute from './sharedComponents/protectedRouteContainer';
 
 const App = () => (
   <Provider store={store}>
@@ -17,7 +18,7 @@ const App = () => (
         <ModalRoot />
         <Header />
         <Switch>
-          <Route path="/" exact component={Index} />
+          <ProtectedRoute path="/" exact component={Index} />
           <Route path="/answers" exact component={Answers} />
           <Route path="/marks" exact component={Marks} />
         </Switch>
