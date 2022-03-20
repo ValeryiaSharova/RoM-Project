@@ -13,7 +13,6 @@ export const changeStatus = () => dispatch => {
 
 export const swapSubject = () => dispatch => {
   const subject = store.get('subject') === 'ОАИП' ? 'ИПО' : 'ОАИП';
-  console.log(subject);
   store.set('subject', subject);
   dispatch(changeSubject(subject));
 };
