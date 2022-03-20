@@ -1,22 +1,19 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect } from 'react';
 import PropTypes from 'proptypes';
-import { ModalConsumer } from '../../context/ModalContext';
-import ModalElement from './Components/Modal';
 import good from '../../images/heart.png';
 import bad from '../../images/skull.png';
 
 const store = require('store');
 
 const AnswersPage = props => {
-  const { getStartAnswerData, saveDataAnswer, getSaveDataAnswer } = props;
+  const { saveDataAnswer, getSaveDataAnswer, isAdmin, loadingGetSaveDataAnswer } = props;
   const markData = store.get('test');
-
   useEffect(() => {
     if (!store.get('test')) {
-      getStartAnswerData();
+      getSaveDataAnswer();
     }
-  }, [getStartAnswerData]);
+  }, []);
 
   return (
     <>
@@ -24,23 +21,14 @@ const AnswersPage = props => {
         Ваши <em>ОТВЕТЫ</em>
       </h1>
       <div className="group-button">
-        <ModalConsumer>
-          {({ showModal }) => (
-            <button
-              className="group-button__button"
-              type="button"
-              onClick={() => showModal(ModalElement, { saveDataAnswer })}
-            >
-              Сохранить ответы
-            </button>
-          )}
-        </ModalConsumer>
-        <button className="group-button__button" type="button" onClick={getSaveDataAnswer}>
-          Загрузить ответы
-        </button>
+        {isAdmin ? (
+          <button className="group-button__button" type="button" onClick={saveDataAnswer}>
+            Сохранить ответы
+          </button>
+        ) : null}
       </div>
 
-      <div className="container card-list-wrapper">
+      <div className="container card-list-wrapper mt-4">
         {markData ? (
           Object.keys(markData).map((person, index) => (
             <div className="card-list" key={person}>
@@ -64,6 +52,8 @@ const AnswersPage = props => {
               </div>
             </div>
           ))
+        ) : loadingGetSaveDataAnswer ? (
+          <h1>Загрузка...</h1>
         ) : (
           <p>Нет данных, перезагрузите страницу или проверьте сервер</p>
         )}
@@ -73,9 +63,10 @@ const AnswersPage = props => {
 };
 
 AnswersPage.propTypes = {
-  getStartAnswerData: PropTypes.func.isRequired,
   saveDataAnswer: PropTypes.func.isRequired,
   getSaveDataAnswer: PropTypes.func.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
+  loadingGetSaveDataAnswer: PropTypes.bool.isRequired,
 };
 
 export default AnswersPage;

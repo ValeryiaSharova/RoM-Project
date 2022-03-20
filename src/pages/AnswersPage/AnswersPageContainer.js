@@ -5,19 +5,14 @@ import * as actionsPeople from '../../redux/actions/peopleAction';
 
 const mapStateToProps = state => ({
   answerData: state.people.answerData,
-  isSaveDataAnswer: state.people.isSaveDataAnswer,
-  errorSaveDataAnswer: state.people.errorSaveDataAnswer,
   loadingGetSaveDataAnswer: state.people.loadingGetSaveDataAnswer,
+  isAdmin: state.user.isAdmin,
 });
 
 const mapDispatchToProps = dispatch => {
-  const { getStartAnswerData, saveDataAnswer, getSaveDataAnswer } = bindActionCreators(
-    actionsPeople,
-    dispatch
-  );
+  const { saveDataAnswer, getSaveDataAnswer } = bindActionCreators(actionsPeople, dispatch);
 
   return {
-    getStartAnswerData,
     saveDataAnswer,
     getSaveDataAnswer,
   };
