@@ -18,7 +18,7 @@ const ModalElement = props => {
   } = props;
   const handleSubmit = e => {
     e.preventDefault();
-    if (e.target[0].value === 'ybrnjytpyftn!') {
+    if (e.target[0].value === '123!') {
       changeStatus();
       onRequestClose();
     }
