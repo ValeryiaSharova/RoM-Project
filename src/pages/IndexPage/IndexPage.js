@@ -33,19 +33,16 @@ const IndexPage = props => {
 
   const goodAnswer = () => {
     checkAnswer(1, victim);
-    questionsData.splice(0, 1);
     setClick(1);
   };
 
   const sosoAnswer = () => {
     checkAnswer(2, victim);
-    questionsData.splice(0, 1);
     setClick(1);
   };
 
   const badAnswer = () => {
     checkAnswer(3, victim);
-    questionsData.splice(0, 1);
     setClick(1);
   };
 
@@ -55,6 +52,7 @@ const IndexPage = props => {
     setVictim(peopleData[index - 1]);
     peopleData.splice(index - 1, 1);
     setQuestion(questionsData[0]);
+    questionsData.splice(0, 1);
 
     if (peopleData.length <= 5 && peopleData.length > 0) {
       fetchPeople();
