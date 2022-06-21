@@ -31,7 +31,7 @@ export const fetchPeople = () => async dispatch => {
   dispatch(requestPeople());
   try {
     const { data: people } = await axios.get(
-      'https://api.jsonbin.io/b/61994f880ddbee6f8b0f54d8/latest'
+      'https://api.jsonbin.io/b/62b0736e5c2a444a2d925b30/latest'
     );
     const newList = [];
     people.map((stud, index) => {
@@ -52,11 +52,11 @@ export const getSaveDataAnswer = subject => async dispatch => {
   if (subject === 'ИПО') {
     try {
       const { data: answerData } = await axios.get(
-        'https://api.jsonbin.io/b/62375a807caf5d67836dadd4/latest',
+        'https://api.jsonbin.io/b/62b0d25f449a1f38211267c3/latest',
         {
           headers: {
             'Content-Type': 'application/json',
-            'secret-key': '$2b$10$DmD.XOZCf7sWxoFopdcxsOVq4D6GVx7hj2PzYZ04pzp/bV1JziGTK',
+            'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
           },
         }
       );
@@ -68,11 +68,11 @@ export const getSaveDataAnswer = subject => async dispatch => {
   } else {
     try {
       const { data: answerData } = await axios.get(
-        'https://api.jsonbin.io/b/619967eb62ed886f91522914/latest',
+        'https://api.jsonbin.io/b/62b0d3c45c2a444a2d92dcca/latest',
         {
           headers: {
             'Content-Type': 'application/json',
-            'secret-key': '$2b$10$DmD.XOZCf7sWxoFopdcxsOVq4D6GVx7hj2PzYZ04pzp/bV1JziGTK',
+            'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
           },
         }
       );
@@ -146,12 +146,13 @@ export const resetMarks = () => dispatch => {
 };
 
 export const saveDataAnswer = subject => async dispatch => {
+  console.log(process.env.REACT_APP_SECRET_KEY);
   if (subject === 'ИПО') {
     try {
-      await axios.put('https://api.jsonbin.io/b/62375a807caf5d67836dadd4', store.get('test'), {
+      await axios.put('https://api.jsonbin.io/b/62b0d25f449a1f38211267c3', store.get('test'), {
         headers: {
           'Content-Type': 'application/json',
-          'secret-key': '$2b$10$DmD.XOZCf7sWxoFopdcxsOVq4D6GVx7hj2PzYZ04pzp/bV1JziGTK',
+          'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
         },
       });
       dispatch(receiveSaveDataAnswer());
@@ -160,10 +161,10 @@ export const saveDataAnswer = subject => async dispatch => {
     }
   } else {
     try {
-      await axios.put('https://api.jsonbin.io/b/619967eb62ed886f91522914', store.get('test'), {
+      await axios.put('https://api.jsonbin.io/b/62b0d3c45c2a444a2d92dcca', store.get('test'), {
         headers: {
           'Content-Type': 'application/json',
-          'secret-key': '$2b$10$DmD.XOZCf7sWxoFopdcxsOVq4D6GVx7hj2PzYZ04pzp/bV1JziGTK',
+          'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
         },
       });
       dispatch(receiveSaveDataAnswer());

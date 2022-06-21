@@ -18,7 +18,7 @@ const ModalElement = props => {
   } = props;
   const handleSubmit = e => {
     e.preventDefault();
-    if (e.target[0].value === '123!') {
+    if (e.target[0].value === process.env.REACT_APP_PASSWORD) {
       changeStatus();
       onRequestClose();
     }
