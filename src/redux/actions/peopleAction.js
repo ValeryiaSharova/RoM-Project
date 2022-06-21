@@ -51,15 +51,12 @@ export const getSaveDataAnswer = subject => async dispatch => {
   dispatch(requestGetSaveDataAnswer());
   if (subject === 'ИПО') {
     try {
-      const { data: answerData } = await axios.get(
-        'https://api.jsonbin.io/b/62b0d25f449a1f38211267c3/latest',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
-          },
-        }
-      );
+      const { data: answerData } = await axios.get(process.env.REACT_APP_ANSWERS_IPO, {
+        headers: {
+          'Content-Type': 'application/json',
+          'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
+        },
+      });
       store.set('test', answerData);
       dispatch(receiveGetSaveDataAnswer(answerData));
     } catch (error) {
@@ -67,15 +64,12 @@ export const getSaveDataAnswer = subject => async dispatch => {
     }
   } else {
     try {
-      const { data: answerData } = await axios.get(
-        'https://api.jsonbin.io/b/62b0d3c45c2a444a2d92dcca/latest',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
-          },
-        }
-      );
+      const { data: answerData } = await axios.get(process.env.REACT_APP_ANSWERS_OAIP, {
+        headers: {
+          'Content-Type': 'application/json',
+          'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
+        },
+      });
       store.set('test', answerData);
       dispatch(receiveGetSaveDataAnswer(answerData));
     } catch (error) {
