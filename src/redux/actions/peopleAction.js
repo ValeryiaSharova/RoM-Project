@@ -30,9 +30,7 @@ export const receiveCheckAnswer = createAction(
 export const fetchPeople = () => async dispatch => {
   dispatch(requestPeople());
   try {
-    const { data: people } = await axios.get(
-      'https://api.jsonbin.io/b/62b0736e5c2a444a2d925b30/latest'
-    );
+    const { data: people } = await axios.get(process.env.REACT_APP_LIST_OF_STUDENTS);
     const newList = [];
     people.map((stud, index) => {
       const marks = store.get('test');
@@ -51,7 +49,7 @@ export const getSaveDataAnswer = subject => async dispatch => {
   dispatch(requestGetSaveDataAnswer());
   if (subject === 'ИПО') {
     try {
-      const { data: answerData } = await axios.get(process.env.REACT_APP_ANSWERS_IPO, {
+      const { data: answerData } = await axios.get(`${process.env.REACT_APP_ANSWERS_IPO}/latest`, {
         headers: {
           'Content-Type': 'application/json',
           'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
@@ -64,7 +62,7 @@ export const getSaveDataAnswer = subject => async dispatch => {
     }
   } else {
     try {
-      const { data: answerData } = await axios.get(process.env.REACT_APP_ANSWERS_OAIP, {
+      const { data: answerData } = await axios.get(`${process.env.REACT_APP_ANSWERS_OAIP}/latest`, {
         headers: {
           'Content-Type': 'application/json',
           'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
@@ -140,10 +138,9 @@ export const resetMarks = () => dispatch => {
 };
 
 export const saveDataAnswer = subject => async dispatch => {
-  console.log(process.env.REACT_APP_SECRET_KEY);
   if (subject === 'ИПО') {
     try {
-      await axios.put('https://api.jsonbin.io/b/62b0d25f449a1f38211267c3', store.get('test'), {
+      await axios.put(process.env.REACT_APP_ANSWERS_IPO, store.get('test'), {
         headers: {
           'Content-Type': 'application/json',
           'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
@@ -155,7 +152,7 @@ export const saveDataAnswer = subject => async dispatch => {
     }
   } else {
     try {
-      await axios.put('https://api.jsonbin.io/b/62b0d3c45c2a444a2d92dcca', store.get('test'), {
+      await axios.put(process.env.REACT_APP_ANSWERS_OAIP, store.get('test'), {
         headers: {
           'Content-Type': 'application/json',
           'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
