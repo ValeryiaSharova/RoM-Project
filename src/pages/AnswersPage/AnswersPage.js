@@ -11,15 +11,16 @@ const AnswersPage = props => {
   const { saveDataAnswer, getSaveDataAnswer, isAdmin, loadingGetSaveDataAnswer, checkAnswer } =
     props;
   const markData = store.get('test');
+  const subject = store.get('subject');
   useEffect(async () => {
     if (!store.get('test')) {
-      await getSaveDataAnswer();
+      await getSaveDataAnswer(subject);
     }
     checkAnswer();
   }, []);
 
   const handleCLick = () => {
-    saveDataAnswer();
+    saveDataAnswer(subject);
     toast.info('Данные сохранены');
   };
 
@@ -27,12 +28,19 @@ const AnswersPage = props => {
     return <h1 className="title">Загрузка...</h1>;
   }
 
+  const getAnswers = async () => {
+    await getSaveDataAnswer(subject);
+  };
+
   return (
     <>
       <h1 className="title">
         Ваши <em>ОТВЕТЫ</em>
       </h1>
       <div className="group-button">
+        <button className="group-button__button" type="button" onClick={getAnswers}>
+          Загрузить ответы
+        </button>
         {isAdmin ? (
           <button className="group-button__button" type="button" onClick={handleCLick}>
             Сохранить ответы
