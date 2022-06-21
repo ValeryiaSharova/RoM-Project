@@ -37,6 +37,33 @@ Start the server
   npm run start
 ```
 
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`REACT_APP_LIST_OF_STUDENTS` - List of students in JSON format.
+
+`REACT_APP_ANSWERS_OAIP`, `REACT_APP_ANSWERS_IPO` - List of answers in JSON format.
+
+Example: 
+
+```bash
+{
+    `Name`:
+        {
+            "all": 0,
+            "mark": 0
+        },
+    ...
+}
+```
+`REACT_APP_QUESTIONS_OAIP`, `REACT_APP_QUESTIONS_IPO` - List of questions in JSON format.
+
+`REACT_APP_SECRET_KEY` - Secret key for requests.
+
+I use [JSONbin.io](https://jsonbin.io/create) and for making requests to private JSON files I need this key.
+
+`REACT_APP_PASSWORD` - Password for admin to get access for questions page.
 
 ## Usage/Examples
 
