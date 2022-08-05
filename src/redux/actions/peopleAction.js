@@ -30,7 +30,13 @@ export const receiveCheckAnswer = createAction(
 export const fetchPeople = () => async dispatch => {
   dispatch(requestPeople());
   try {
-    const { data: people } = await axios.get(process.env.REACT_APP_LIST_OF_STUDENTS);
+    const { data: people } = await axios.get(`${process.env.REACT_APP_LIST_OF_STUDENTS}/latest`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': `$2b$10$DmD${process.env.REACT_APP_SECRET_KEY}`,
+        'X-Bin-Meta': false,
+      },
+    });
     const newList = [];
     people.map((stud, index) => {
       const marks = store.get('test');
@@ -52,7 +58,8 @@ export const getSaveDataAnswer = subject => async dispatch => {
       const { data: answerData } = await axios.get(`${process.env.REACT_APP_ANSWERS_IPO}/latest`, {
         headers: {
           'Content-Type': 'application/json',
-          'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
+          'X-Master-Key': `$2b$10$DmD${process.env.REACT_APP_SECRET_KEY}`,
+          'X-Bin-Meta': false,
         },
       });
       store.set('test', answerData);
@@ -65,7 +72,8 @@ export const getSaveDataAnswer = subject => async dispatch => {
       const { data: answerData } = await axios.get(`${process.env.REACT_APP_ANSWERS_OAIP}/latest`, {
         headers: {
           'Content-Type': 'application/json',
-          'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
+          'X-Master-Key': `$2b$10$DmD${process.env.REACT_APP_SECRET_KEY}`,
+          'X-Bin-Meta': false,
         },
       });
       store.set('test', answerData);
@@ -143,7 +151,8 @@ export const saveDataAnswer = subject => async dispatch => {
       await axios.put(process.env.REACT_APP_ANSWERS_IPO, store.get('test'), {
         headers: {
           'Content-Type': 'application/json',
-          'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
+          'X-Master-Key': `$2b$10$DmD${process.env.REACT_APP_SECRET_KEY}`,
+          'X-Bin-Meta': false,
         },
       });
       dispatch(receiveSaveDataAnswer());
@@ -155,7 +164,8 @@ export const saveDataAnswer = subject => async dispatch => {
       await axios.put(process.env.REACT_APP_ANSWERS_OAIP, store.get('test'), {
         headers: {
           'Content-Type': 'application/json',
-          'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
+          'X-Master-Key': `$2b$10$DmD${process.env.REACT_APP_SECRET_KEY}`,
+          'X-Bin-Meta': false,
         },
       });
       dispatch(receiveSaveDataAnswer());

@@ -7,14 +7,15 @@ export const failLoadQuestions = createAction('QUESTIONS/FAIL_LOAD_QUESTIONS', e
 
 export const fetchQuestions = subject => async dispatch => {
   dispatch(requestQuestions());
-  const OAIP = process.env.REACT_APP_QUESTIONS_OAIP;
-  const IPO = process.env.REACT_APP_QUESTIONS_IPO;
+  const OAIP = `${process.env.REACT_APP_QUESTIONS_OAIP}/latest`;
+  const IPO = `${process.env.REACT_APP_QUESTIONS_IPO}/latest`;
   try {
     if (subject === 'ИПО') {
       const { data: questions } = await axios.get(IPO, {
         headers: {
           'Content-Type': 'application/json',
-          'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
+          'X-Master-Key': `$2b$10$DmD${process.env.REACT_APP_SECRET_KEY}`,
+          'X-Bin-Meta': false,
         },
       });
       dispatch(receiveQuestions(questions));
@@ -22,7 +23,8 @@ export const fetchQuestions = subject => async dispatch => {
       const { data: questions } = await axios.get(OAIP, {
         headers: {
           'Content-Type': 'application/json',
-          'secret-key': `$2b$10$K8rHnU${process.env.REACT_APP_SECRET_KEY}`,
+          'X-Master-Key': `$2b$10$DmD${process.env.REACT_APP_SECRET_KEY}`,
+          'X-Bin-Meta': false,
         },
       });
       dispatch(receiveQuestions(questions));
